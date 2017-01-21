@@ -3,9 +3,14 @@ using System.Collections;
 
 public class WaveScroll : MonoBehaviour {
 
-	[SerializeField] Transform water1;
-	[SerializeField] Transform water2;
-	[SerializeField] Transform water3;
+
+	[SerializeField] private GameObject waterPlane;
+	GameObject w1;
+	GameObject w2;
+	GameObject w3;
+	Transform water1;
+	Transform water2;
+	Transform water3;
 
 	[Range (0.1f,20.0f)] public float scrollSpeed = 5.0f;
 	[Range(0.1f, 50.0f)] public float resetDist = 12;
@@ -15,7 +20,21 @@ public class WaveScroll : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		dist = Mathf.Abs (water2.position.x - water1.position.x) - 0.003f;
+
+		Vector3 newDist = new Vector3 (this.transform.position.x - 10.27f, this.transform.position.y - 4.77f, -0.2f); 
+		w1 = Instantiate (waterPlane, newDist, Quaternion.Euler(-90.0f, 0.0f, 0.0f)) as GameObject;
+		w2 = Instantiate (waterPlane, newDist, Quaternion.Euler(-90.0f, 0.0f, 0.0f)) as GameObject;
+		w3 = Instantiate (waterPlane, newDist, Quaternion.Euler(-90.0f, 0.0f, 0.0f)) as GameObject;
+
+		w1.transform.parent = this.transform;
+		w2.transform.parent = this.transform;
+		w3.transform.parent = this.transform;
+
+		water1 = w1.transform;
+		water2 = w2.transform;
+		water3 = w3.transform;
+
+		dist = Mathf.Abs (12.24f - 2.23652f) - 0.009f;
 		water2.position = new Vector3 (water1.position.x+dist, water2.position.y, water2.position.z);
 		water3.position = new Vector3 (water2.position.x+dist, water3.position.y, water3.position.z);
 		leftBorder = GameObject.Find ("Main Camera").transform.FindChild ("leftBorder").transform.position.x - resetDist;

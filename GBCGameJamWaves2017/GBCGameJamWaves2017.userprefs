@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BackgroundScroll.cs">
+    <Files>
+      <File FileName="Assets\Scripts\BackgroundScroll.cs" Line="20" Column="55" />
+      <File FileName="Assets\Scripts\WaveScroll.cs" Line="18" Column="69" />
+      <File FileName="Assets\Scripts\GenerateWave.cs" Line="70" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
