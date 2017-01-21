@@ -3,50 +3,46 @@ using System.Collections;
 
 public class ProjectileShooter : MonoBehaviour
 {
-
-    [SerializeField]
-    private GameObject prefab;
+    // 85 top max, 275 bottom max
+    [SerializeField] private GameObject prefab;
+    private GameObject bulletspawn;
+    private float anglespeed = 25;
 
     // Use this for initialization
     void Start()
     {
+        bulletspawn = transform.FindChild("BulletSpawn").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("click");
-            GameObject projectile = Instantiate(prefab) as GameObject;
-            projectile.transform.position = this.transform.position;
+
+            GameObject projectile = Instantiate(prefab, bulletspawn.transform.position, bulletspawn.transform.rotation) as GameObject;
+            projectile.transform.position = bulletspawn.transform.position;
 
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector2(10, 1);
-
-            Vector2 dir = rb.velocity;//transform.rigidbody2D.velocity;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+            rb.velocity = 10 * (bulletspawn.transform.position - this.transform.position);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            RotateLeft();
+            //if ((this.transform.forward.z <= 84 && this.transform.forward.z >= 0) || (this.transform.forward.z >= 269 && this.transform.forward.z <= 360))
+                // if((this.transform.rotation.z <= 84  && this.transform.rotation.z >= 0) || (this.transform.rotation.z >= 269 && this.transform.rotation.z <= 360))
+                RotateAngle(anglespeed);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            RotateRight();
+         // if((this.transform.rotation.z <= 90  && this.transform.rotation.z >= 0) || (this.transform.rotation.z <= 275 && this.transform.rotation.z >= 360))
+            RotateAngle(-anglespeed);
         }
     }
 
-    void RotateLeft()
+    void RotateAngle(float angle)
     {
-        transform.Rotate(Vector3.forward * -5);
-    }
-   
-    void RotateRight()
-    {
-        transform.Rotate(Vector3.forward * 5);
+        transform.Rotate(Vector3.forward * angle);
     }
 }
