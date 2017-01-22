@@ -4,8 +4,9 @@ using UnityEngine.UI;
 
 public class PowerSlider : MonoBehaviour {
 	Slider slider;
-	bool launched;
+	public bool launched;
     bool updown; //false = up, true = down
+    public float shotpower;
 	// Use this for initialization
 	void Start () {
 		slider = GetComponent<Slider> ();
@@ -27,7 +28,10 @@ public class PowerSlider : MonoBehaviour {
             if (slider.value >= 1)
                 updown = true;
             if (Input.GetKeyDown(KeyCode.Space))
+            {
                 launched = true;
+                shotpower = slider.value;
+            }         
         }
 	}
 }
